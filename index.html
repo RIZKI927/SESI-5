@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+	<style>
+		#root {
+			background-color: #3a96af;
+			color: #a6115f;
+			font-size: 2em;
+			justify-content: center;
+			text-align: center;
+			height: 100vh;
+
+		}
+
+		.jkt {
+			height: 100px;
+			width: 100px;
+		}
+	</style>
+
+	<div id="root">
+		<input type="text" placeholder="username" id="usernameInput" />
+		<input type="password" placeholder="password" id="passwordInput" />
+		<button onclick="onLogin()" id="buttonLogin">LOGIN</button>
+		<button onclick="onLogout()" id="buttonLogout">Logout</button>
+		<br />
+		<h1 id="admin">WELCOME ADMIN</h1>
+		<h1 id="member">WELCOME MEMBER</h1>
+		<img class="jkt" id="JKT" src="myOshi.png" />
+		<!--<img src="myOshi.png" id="Oshi" />-->
+		<!--<img src="Etolk.png" id="Et" />-->
+	</div>
+
+	<script /*src="Index.js"*/ type="application/javascript">
+
+		let usernameInput = document.getElementById('usernameInput');
+		let passwordInput = document.getElementById('passwordInput');
+		let buttonLogin = document.getElementById('buttonLogin');
+		let buttonLogout = document.getElementById('buttonLogout');
+		let admin = document.getElementById('admin');
+		let member = document.getElementById('member');
+		let JKT = document.getElementById('JKT');
+
+		admin.style.display = "none";
+		member.style.display = "none";
+		JKT.style.display = "none";
+		buttonLogout.style.display = "none"
+
+		function onLogin() {
+			localStorage.setItem("username", usernameInput.value)
+			buttonLogout.style.display = "block"
+
+			if (usernameInput.value == "yyyy" && passwordInput.value == "1111") {
+				localStorage.setItem("role", "admin")
+				usernameInput.style.display = "none"
+				passwordInput.style.display = "none"
+				buttonLogin.style.display = "none"
+				admin.style.display = "block"
+				member.style.display = "none"
+			} else {
+				usernameInput.style.display = "none"
+				passwordInput.style.display = "none"
+				buttonLogin.style.display = "none"
+				localStorage.setItem("role", "member")
+				admin.style.display = "none"
+				member.style.display = "block"
+			}
+			if (usernameInput.value == "ashel" && passwordInput.value == "123") {
+				localStorage.setItem("role", "JKT")
+				usernameInput.style.display = "none"
+				passwordInput.style.display = "none"
+				buttonLogin.style.display = "none"
+				JKT.style.display = "block"
+				member.style.display = "none"
+			}
+		}
+
+		if (localStorage.getItem('username')) {
+			usernameInput.style.display = "none"
+			passwordInput.style.display = "none"
+			buttonLogin.style.display = "none"
+			buttonLogout.style.display = "block"
+			if (localStorage.getItem('role') == "admin") {
+				member.style.display = "none"
+				admin.style.display = "block"
+			} else {
+				admin.style.display = "none"
+				member.style.display = "block"
+			}
+			if (localStorage.getItem('role') == "admin") {
+				member.style.display = "none"
+				admin.style.display = "none"
+				JKT.style.display = "block"
+			}
+		}
+
+		function onLogout() {
+			localStorage.clear();
+			location.reload();
+		}
+
+	</script>
+
+</body>
+</html>
